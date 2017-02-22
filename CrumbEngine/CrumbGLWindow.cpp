@@ -1,3 +1,4 @@
+
 // CrumbGLWindow.h
 // OpenGL/SDL Context for the rendered window
 // - Some data may be remaining for testing purposes
