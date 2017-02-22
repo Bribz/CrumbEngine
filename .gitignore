@@ -1,6 +1,8 @@
 CrumbEngine/Debug/
 CrumbEngine/Release/
 
+*.VC.db
+
 # Prerequisites
 *.d
 
