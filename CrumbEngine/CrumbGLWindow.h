@@ -1,3 +1,11 @@
+
+// CrumbGLWindow.h
+// OpenGL/SDL Context for the rendered window
+// - Some data may be remaining for testing purposes
+// - SDL2 and OpenGL Boilerplate Code
+// - Standard window opening
+// Bribz - 2/22/2017
+
 #ifndef CRUMB_GL_WINDOW
 #define CRUMB_GL_WINDOW
 

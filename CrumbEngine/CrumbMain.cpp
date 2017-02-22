@@ -1,6 +1,9 @@
+
+// CrumbMain.h
+// Main entry point/object managing game loop
+// Bribz - 2/22/2017
+
 #include "CrumbMain.h"
-
-
 
 CrumbMain::CrumbMain()
 {

@@ -1,3 +1,8 @@
+
+// CrumbMain.h
+// Main entry point/object managing game loop
+// Bribz - 2/22/2017
+
 #ifndef CRUMB_MAIN
 #define CRUMB_MAIN
 

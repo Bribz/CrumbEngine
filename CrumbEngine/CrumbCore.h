@@ -1,3 +1,9 @@
+
+// CrumbCore.h
+// Core Headers for game
+// - May be altered later for efficiency
+// Bribz - 2/22/2017
+
 #ifndef CRUMB_CORE
 #define CRUMB_CORE
 

@@ -1,5 +1,11 @@
-#include "CrumbGLWindow.h"
+// CrumbGLWindow.h
+// OpenGL/SDL Context for the rendered window
+// - Some data may be remaining for testing purposes
+// - SDL2 and OpenGL Boilerplate Code
+// - Standard window opening
+// Bribz - 2/22/2017
 
+#include "CrumbGLWindow.h"
 
 CrumbGLWindow::CrumbGLWindow()
 {
