@@ -31,7 +31,6 @@ bld/
 *_p.c
 *_i.h
 *.ilk
-*.obj
 *.pch
 *.pdb
 *.pgc
@@ -94,8 +93,6 @@ ipch/
 # Compiled Object files
 *.slo
 *.lo
-*.o
-*.obj
 
 # Precompiled Headers
 *.gch
