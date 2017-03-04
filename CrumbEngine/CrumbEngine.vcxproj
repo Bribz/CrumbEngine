@@ -90,7 +90,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\Middleware\SDL2\include;$(ProjectDir)..\Middleware\Bullet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,6 +98,14 @@
       <AdditionalLibraryDirectories>$(ProjectDir)..\Middleware\SDL2\lib\SDL2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -132,6 +140,14 @@
       <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)..\Middleware\SDL2\lib\SDL2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -290,8 +306,11 @@
     <ClCompile Include="..\Middleware\Bullet\LinearMath\btSerializer.cpp" />
     <ClCompile Include="..\Middleware\Bullet\LinearMath\btThreads.cpp" />
     <ClCompile Include="..\Middleware\Bullet\LinearMath\btVector3.cpp" />
+    <ClCompile Include="CrumbFileReader.cpp" />
     <ClCompile Include="CrumbGLWindow.cpp" />
     <ClCompile Include="CrumbMain.cpp" />
+    <ClCompile Include="CrumbMaterial.cpp" />
+    <ClCompile Include="CrumbShader.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -512,8 +531,15 @@
     <ClInclude Include="..\Middleware\Bullet\LinearMath\btTransformUtil.h" />
     <ClInclude Include="..\Middleware\Bullet\LinearMath\btVector3.h" />
     <ClInclude Include="CrumbCore.h" />
+    <ClInclude Include="CrumbEnumerations.h" />
+    <ClInclude Include="CrumbFileReader.h" />
     <ClInclude Include="CrumbGLWindow.h" />
     <ClInclude Include="CrumbMain.h" />
+    <ClInclude Include="CrumbMaterial.h" />
+    <ClInclude Include="CrumbShader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Temp.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

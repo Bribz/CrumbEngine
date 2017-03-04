@@ -1,6 +1,6 @@
 
 // CrumbCore.h
-// Core Headers for game
+// Core Headers for engine
 // - May be altered later for efficiency
 // Bribz - 2/22/2017
 

@@ -20,7 +20,7 @@ int main(int argc, char ** argv)
 	
 	CrumbMain *game = new CrumbMain();
 	delete game;
-
+	
 	/*
 	delete dynamicsWorld;
 	delete solver;
