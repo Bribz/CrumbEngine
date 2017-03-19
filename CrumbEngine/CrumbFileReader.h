@@ -13,11 +13,8 @@ using namespace std;
 class CrumbFileReader
 {
 public:
-	
-
-	static vector<const char*> GetShaderPaths(const char * fileName);
-
-	static const char* ReadShader(const char* filePath);
+	static vector<string> GetShaderPaths(const char * fileName);
+	static string ReadShader(const char* filePath);
 
 private:
 	//const char* BaseShaderFilePath = "$(ProjectDir)\Shaders";

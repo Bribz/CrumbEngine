@@ -1,16 +1,12 @@
-#version version_number
-  
-in type in_variable_name;
-in type in_variable_name;
+#version 330 
 
-out type out_variable_name;
-  
-uniform type uniform_name;
-  
-void main()
-{
-  // Process input(s) and do some weird graphics stuff
-  ...
-  // Output processed stuff to output variable
-  out_variable_name = weird_stuff_we_processed;
+layout (location = 0) in vec3 inPosition; 
+layout (location = 1) in vec3 inColor; 
+
+smooth out vec3 theColor; 
+
+void main() 
+{ 
+   gl_Position = vec4(inPosition, 0.0, 1.0); 
+   theColor = inColor; 
 }

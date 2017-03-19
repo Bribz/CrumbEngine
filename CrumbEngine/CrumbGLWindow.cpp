@@ -8,16 +8,8 @@
 
 #include "CrumbGLWindow.h"
 
-CrumbGLWindow::CrumbGLWindow()
+void CrumbGLWindow::LoadOpenGLData()
 {
-	InitializeContext();
-	//TODO: Return -1 if false
-
-	// TEMP: Clear buffer, black background
-	glClearColor(1.0, 0.0, 0.5, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	SDL_GL_SwapWindow(Main_Window);
-
 	//Generate Buffer
 	GLuint vertexbufferID;
 	glGenBuffers(1, &vertexbufferID);
@@ -33,6 +25,45 @@ CrumbGLWindow::CrumbGLWindow()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+	/*
+	CrumbMaterial* tmpMat = (CrumbMaterial*)dataManager->GetObject(0);
+	tmpMat->CreateShaderProgram();
+	*/
+}
+
+CrumbGLWindow::CrumbGLWindow(DataManager * dataManager)
+{
+	Data_Manager = dataManager;
+
+	InitializeContext();
+	//TODO: Return -1 if false
+
+	// TEMP: Clear buffer, black background
+	glClearColor(1.0, 0.0, 0.5, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	SDL_GL_SwapWindow(Main_Window);
+
+	
+
+	GLuint vertShaderID = glCreateShader(GL_VERTEX_SHADER);
+	GLuint fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	const char* tmpHolder[1];
+	tmpHolder[0] = vertShaderCode;
+	glShaderSource(vertShaderID, 1, tmpHolder, 0);
+	tmpHolder[0] = fragShaderCode;
+	glShaderSource(fragShaderID, 1, tmpHolder, 0);
+
+	glCompileShader(vertShaderID);
+	glCompileShader(fragShaderID);
+
+	programID = glCreateProgram();
+	glAttachShader(programID, vertShaderID);
+	glAttachShader(programID, fragShaderID);
+	glLinkProgram(programID);
+
+	glUseProgram(programID);
+
+	LoadOpenGLData();
 }
 
 
@@ -92,7 +123,7 @@ bool CrumbGLWindow::SetOGLAttributes()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 
 	// Set Double Buffer with 24bit Z buffer;
 	// TODO: ADJUST THIS LATER FOR CLIENT CHOICE

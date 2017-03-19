@@ -8,6 +8,7 @@
 
 #include "CrumbCore.h"
 #include "CrumbGLWindow.h"
+#include "DataManager.h"
 
 class CrumbMain
 {
@@ -18,8 +19,9 @@ public:
 	void Shutdown();
 
 private:
-	bool running;
+	DataManager* Data_Manager;
 	CrumbGLWindow *Game_Window;
+	bool running;
 
 	void Loop();
 

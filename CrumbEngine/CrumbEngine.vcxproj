@@ -88,7 +88,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;PROJECT_LOCATION=R"($(ProjectDir))";_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\Middleware\SDL2\include;$(ProjectDir)..\Middleware\Bullet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -311,6 +311,7 @@
     <ClCompile Include="CrumbMain.cpp" />
     <ClCompile Include="CrumbMaterial.cpp" />
     <ClCompile Include="CrumbShader.cpp" />
+    <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -537,9 +538,13 @@
     <ClInclude Include="CrumbMain.h" />
     <ClInclude Include="CrumbMaterial.h" />
     <ClInclude Include="CrumbShader.h" />
+    <ClInclude Include="CrumbTypes.h" />
+    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="json.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Temp.vert" />
+    <None Include="Shaders\Temp.f" />
+    <None Include="Shaders\Temp.v" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

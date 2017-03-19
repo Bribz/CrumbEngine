@@ -22,33 +22,35 @@ CrumbMaterial::~CrumbMaterial()
 	shaders->clear();
 
 	delete shaders;
-	delete materialName;
+	//delete materialName;
 }
 
 void CrumbMaterial::Initialize_ShaderFiles()
 {
-	std::vector<const char*> filePaths = CrumbFileReader::GetShaderPaths(materialName);
+	std::vector<string> filePaths = CrumbFileReader::GetShaderPaths(materialName);
+	
 	for (auto name : filePaths)
 	{
-		printf("Found file : %s", name);
+		printf("Found file : %s\n", name.c_str());
 	}
+	
 
 	for (auto path : filePaths)
 	{
-		char* shadChar;
-		memcpy(shadChar, path, strlen(path)-1);
+		//memcpy(shadChar, (void*)path[strlen(path-1)], 1);
+		
+		string shaderFile = CrumbFileReader::ReadShader(path.c_str());
 
-		const char* shaderFile = CrumbFileReader::ReadShader(path);
-
-		shaders->push_back(new CrumbShader(materialName, shaderFile, (GLShaderType)*shadChar));
+		shaders->push_back(new CrumbShader(materialName, shaderFile.c_str(), (GLShaderType)path[path.length() - 1]));
 	}
 }
 
 //TODO: Handle Errors
 GLuint CrumbMaterial::CreateShaderProgram()
 {
+	GLchar programErrors[512];
 	GLint result = GL_FALSE;
-	printf("Linking shader program %s", materialName );
+	printf("Linking shader program %s \n", materialName );
 
 	GLuint program = glCreateProgram();
 	for (auto shader : *shaders)
@@ -61,8 +63,12 @@ GLuint CrumbMaterial::CreateShaderProgram()
 	glGetProgramiv(program, GL_LINK_STATUS, &result);
 	//glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
 	//std::vector<char> programError((logLength > 1) ? logLength : 1);
-	//glGetProgramInfoLog(program, logLength, NULL, &programError[0]);
 	//std::cout << &programError[0] << std::endl;
+	if (!result)
+	{
+		glGetProgramInfoLog(program, 512, NULL, programErrors);
+	}
+
 
 	for (auto it = shaders->begin(); it != shaders->end(); ++it) 
 	{

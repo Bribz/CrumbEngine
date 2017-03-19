@@ -16,11 +16,11 @@ public:
 	~CrumbShader();
 
 	GLuint pShader;
-	const char* shaderName;
+	char* shaderName;
 	
 	GLuint LoadShader();
 private: 
-	const char* shaderFILE;
+	char* shaderFILE;
 	GLShaderType SHADER_TYPE;
 
 	GLenum DefineShaderType();

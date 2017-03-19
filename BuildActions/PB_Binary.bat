@@ -1,0 +1,1 @@
+xcopy /y /d  "$(ProjectDir)\..\Middleware\Runtime\*.dll" "$(ProjectDir)$(OutDir)"

@@ -17,7 +17,6 @@ int main(int argc, char ** argv)
 	btDiscreteDynamicsWorld* dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
 	*/
-	
 	CrumbMain *game = new CrumbMain();
 	delete game;
 	

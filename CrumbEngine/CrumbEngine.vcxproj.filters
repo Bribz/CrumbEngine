@@ -424,6 +424,7 @@
     <ClCompile Include="CrumbFileReader.cpp" />
     <ClCompile Include="CrumbShader.cpp" />
     <ClCompile Include="CrumbMaterial.cpp" />
+    <ClCompile Include="DataManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrumbGLWindow.h" />
@@ -1081,6 +1082,9 @@
     <ClInclude Include="CrumbFileReader.h" />
     <ClInclude Include="CrumbShader.h" />
     <ClInclude Include="CrumbMaterial.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="CrumbTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bullet">
@@ -1091,7 +1095,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Temp.vert">
+    <None Include="Shaders\Temp.v">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Temp.f">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

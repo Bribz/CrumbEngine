@@ -1,3 +1,5 @@
+#pragma message("PROJECT_LOCATION == " PROJECT_LOCATION)
+
 #include "CrumbFileReader.h"
 
 #include <Windows.h>
@@ -6,6 +8,7 @@
 #include <fstream>
 
 #include <string>
+#include <stdio.h>
 
 
 
@@ -22,10 +25,11 @@ CrumbFileReader::~CrumbFileReader()
 }
 
 //TODO: Handle this to manage cross-platform file reads
-std::vector<const char*> CrumbFileReader::GetShaderPaths(const char * fileName)
+std::vector<string> CrumbFileReader::GetShaderPaths(const char * fileName)
 {
-	std::vector<const char*> filenames;
-	std::string search_path = "$(ProjectDir)/Shaders/" + std::string(fileName) + ".*";
+	std::vector<string> filenames;
+	std::string search_path = PROJECT_LOCATION;
+	search_path += "\Shaders\\" + std::string(fileName) + ".*";
 
 	WIN32_FIND_DATA fd;
 	HANDLE hFind = ::FindFirstFile(std::wstring(search_path.begin(), search_path.end()).c_str(), &fd);
@@ -36,15 +40,24 @@ std::vector<const char*> CrumbFileReader::GetShaderPaths(const char * fileName)
 			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
 				char mbstr[260];
 				wcstombs(mbstr, fd.cFileName, 260);
-				filenames.push_back(mbstr);
+				string tmp = PROJECT_LOCATION;
+				tmp += +"\Shaders\\";
+				tmp += mbstr;
+				filenames.push_back(tmp);
 			}
 		} while (::FindNextFile(hFind, &fd));
 		::FindClose(hFind);
 	}
+	else
+	{
+		//FAILED TO FIND SHADER FILES
+		printf("[ Fatal Error ] : Failed to find files!\n--Path : %s\n", search_path.c_str());
+		printf("--Shader Name : %s\n", fileName);
+	}
 	return filenames;
 }
 
-const char* CrumbFileReader::ReadShader(const char * filePath)
+string CrumbFileReader::ReadShader(const char * filePath)
 {
 	
 	std::string content;
@@ -62,5 +75,5 @@ const char* CrumbFileReader::ReadShader(const char * filePath)
 	}
 
 	fileStream.close();
-	return content.c_str();
+	return content;
 }

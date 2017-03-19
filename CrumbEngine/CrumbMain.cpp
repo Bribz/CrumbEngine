@@ -11,8 +11,13 @@ CrumbMain::CrumbMain()
 	
 	running = true;
 
+	//Load Data
+	long* pBlockSize = new long(0);
+	void* dManagerPtr = DataManager::INIT_MEMORY_BLOCK_SIZE(pBlockSize);
+	Data_Manager = new (dManagerPtr) DataManager(pBlockSize);
+
 	//Launch Game Window
-	Game_Window = new CrumbGLWindow();
+	Game_Window = new CrumbGLWindow(Data_Manager);
 
 	Loop();
 
@@ -60,11 +65,11 @@ void CrumbMain::Shutdown()
 	
 	running = false;
 	
+	delete Data_Manager;
+
 	delete Game_Window;
 
 	SDL_Quit();
-
-	
 }
 
 CrumbMain::~CrumbMain()

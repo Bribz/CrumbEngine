@@ -5,20 +5,25 @@
 
 CrumbShader::CrumbShader(const char* sName, const char* sFile, GLShaderType sType)
 {
-	shaderName = sName;
-	shaderFILE = sFile;
+	size_t len = strlen(sName) + 1;
+	shaderName = new char[len];
+	strcpy_s(shaderName, len, sName);
+
+	len = strlen(sFile) + 1;
+	shaderFILE = new char[len];
+	strcpy_s(shaderFILE, len, sFile);
+
 	SHADER_TYPE = sType;
 }
 
 CrumbShader::~CrumbShader()
 {
 	delete shaderFILE;
-	delete shaderName;
 }
 
 GLenum CrumbShader::DefineShaderType()
 {
-	GLenum retType;
+	GLenum retType = GL_VERTEX_SHADER;
 	switch (SHADER_TYPE)
 	{
 		case GLShaderType::COMPUTE:
@@ -46,6 +51,7 @@ GLenum CrumbShader::DefineShaderType()
 			printf("ERROR: Undefined Tesselation shader handling!");
 		}
 		case GLShaderType::NULL_TYPE:
+		default:
 		{
 			retType = GL_INVALID_ENUM;
 			break;
@@ -58,27 +64,28 @@ GLenum CrumbShader::DefineShaderType()
 GLuint CrumbShader::LoadShader()
 {
 	GLuint nShader = glCreateShader(DefineShaderType());
-	GLchar* shaderErrors;
+	GLchar shaderErrors[512];
 	GLsizei errorCount;
 
 	// Read shaders
 
 	GLint result = GL_FALSE;
-	int logLength;
+	//int logLength;
 
-	printf("Compiling Shader : %s", shaderName);
+	printf("Compiling Shader : %s\n", shaderName);
 	glShaderSource(nShader, 1, &shaderFILE, NULL);
 	glCompileShader(nShader);
 
 	// Check vertex shader
 	glGetShaderiv(nShader, GL_COMPILE_STATUS, &result);
-	glGetShaderiv(nShader, GL_INFO_LOG_LENGTH, &logLength);
+	//glGetShaderiv(nShader, GL_INFO_LOG_LENGTH, &logLength);
 	//std::vector vertShaderError((logLength > 1) ? logLength : 1);
-	glGetShaderInfoLog(nShader, logLength, &errorCount, shaderErrors);
+	//glGetShaderInfoLog(nShader, logLength, &errorCount, shaderErrors);
 	
-	if (errorCount > 0)
+	if (!result)
 	{
-		printf("SHADER_LOADING_ERROR : %s", shaderErrors);
+		glGetShaderInfoLog(nShader, 512, NULL, shaderErrors);
+		printf("SHADER_LOADING_ERROR : %s\n", shaderErrors);
 	}
 
 	pShader = nShader;
